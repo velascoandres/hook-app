@@ -24,8 +24,8 @@ export const Message = () => {
         );
         return () => {
             // Cuando el componente se destruye
-            // Se usa para optimizar
             window.removeEventListener('mousemove', handleMouseMove);
+            // Se usa para optimizar
             console.log('componente desmonstado');
         };
     }, []);
@@ -39,4 +39,4 @@ export const Message = () => {
             </p>
         </div>
     );
-}
+};
