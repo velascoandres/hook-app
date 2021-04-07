@@ -1,5 +1,6 @@
 import React, { FormEventHandler, Fragment, useEffect, useState } from 'react'
 import './effects.css';
+import { Message } from './Message';
 
 export type FormState = {
     name: string;
@@ -8,6 +9,8 @@ export type FormState = {
 
 
 export const SimpleForm = () => {
+
+
 
     const [formState, setFormState] = useState<FormState>(
         {
@@ -76,6 +79,9 @@ export const SimpleForm = () => {
                     onChange={handleInputChange}
                 />
             </div>
+
+            {(name === '123') && <Message />}
+
         </Fragment>
     );
 }
