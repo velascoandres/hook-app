@@ -5,7 +5,7 @@ import './counter.css';
 
 export const CounterWithCustomHook = () => {
 
-    const { state: counter, increment, decrement, reset } = useCounter(100);
+    const { counter, increment, decrement, reset } = useCounter(100);
 
     return (
         <Fragment>
