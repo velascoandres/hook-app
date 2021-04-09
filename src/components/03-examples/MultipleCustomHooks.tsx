@@ -19,7 +19,7 @@ export const MultipleCustomHooks = () => {
 
     const { data, loading } = useFetch<IQuote>(url);
 
-    const { author, quote } = data ? data[0] : { author: '', quote: ''};
+    const { author, quote } = data && data.length ? data[0] : { author: '', quote: ''};
 
 
     return (
