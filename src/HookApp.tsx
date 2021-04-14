@@ -6,6 +6,7 @@ import { SimpleForm } from './components/02-useEffect/SimpleForm'
 import { MultipleCustomHooks } from './components/03-examples/MultipleCustomHooks'
 import { FocusScreen } from './components/04-useRef/FocusScreen'
 import { ReafExampleRef } from './components/04-useRef/ReafExampleRef'
+import { Layout } from './components/05-useLayoutEffect/LayoutComponent';
 
 export const HookApp = () => {
     return (
@@ -17,8 +18,10 @@ export const HookApp = () => {
             <FormWithCustomHook />
             <MultipleCustomHooks />
             <FocusScreen />
-             */}
+           
             <ReafExampleRef />
+              */}
+            <Layout />
         </div>
     );
 }
