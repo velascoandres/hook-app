@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 
 // /api/quotes/1
@@ -13,6 +13,8 @@ export interface IFetchState<T> {
 export const useFetch = <T>(url: string): IFetchState<T> => {
 
 
+    const isMounted = useRef<boolean>(true)
+
     const [state, setstate] = useState<IFetchState<T>>(
         {
             data: null,
@@ -20,8 +22,15 @@ export const useFetch = <T>(url: string): IFetchState<T> => {
         }
     );
 
+
     useEffect(() => {
-        
+        return () => {
+            isMounted.current = false;
+        };
+    }, []);
+
+    useEffect(() => {
+
         setstate(
             {
                 data: null,
@@ -33,13 +42,17 @@ export const useFetch = <T>(url: string): IFetchState<T> => {
             .then(resp => resp.json())
             .then(
                 data => {
-                    setstate(
-                        {
-                            loading: false,
-                            error: null,
-                            data,
-                        },
-                    )
+                    if (isMounted.current) {
+                        setstate(
+                            {
+                                loading: false,
+                                error: null,
+                                data,
+                            },
+                        );
+                    } else {
+                        console.log('setstate no se llamo');
+                    }
                 },
             );
 
