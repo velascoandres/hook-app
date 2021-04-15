@@ -7,6 +7,7 @@ import { MultipleCustomHooks } from './components/03-examples/MultipleCustomHook
 import { FocusScreen } from './components/04-useRef/FocusScreen'
 import { ReafExampleRef } from './components/04-useRef/ReafExampleRef'
 import { Layout } from './components/05-useLayoutEffect/Layout';
+import { Memorize } from './components/06-memos/Memorize'
 
 export const HookApp = () => {
     return (
@@ -18,10 +19,10 @@ export const HookApp = () => {
             <FormWithCustomHook />
             <MultipleCustomHooks />
             <FocusScreen />
-           
             <ReafExampleRef />
-              */}
             <Layout />
+            */}
+            <Memorize />
         </div>
     );
 }
