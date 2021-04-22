@@ -1,14 +1,14 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { useForm } from '../../hooks/useForm';
 import './styles.css';
-import { initialState, ITodo, TodoAction, TodoActionEnum, todoReducer } from './todoReducer';
+import { BorrarTodo, CrearTodo, ITodo, TodoActionEnum, todoReducer } from './todoReducer';
 
 
 const init = () => {
 
     const rawTodos = localStorage.getItem('todos');
 
-    return rawTodos ? JSON.parse(rawTodos): [];
+    return rawTodos ? JSON.parse(rawTodos) : [];
 };
 
 
@@ -23,6 +23,17 @@ export const TodoApp = () => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
 
+
+    const handleDelete = (id: number) => {
+        return () => {
+            const action: BorrarTodo = {
+                type: TodoActionEnum.borrar,
+                payload: { id, },
+            };
+            dispatch(action);
+        };
+    };
+
     const renderizarTodos = () => {
         return todos.map(
             ({ id, desc }, indice: number) => (
@@ -35,6 +46,7 @@ export const TodoApp = () => {
                     </p>
                     <button
                         className="btn btn-danger"
+                        onClick={handleDelete(id)}
                     >
                         Borrar
                     </button>
@@ -58,8 +70,7 @@ export const TodoApp = () => {
             desc: description,
             done: false,
         };
-
-        const action: TodoAction = {
+        const action: CrearTodo = {
             type: TodoActionEnum.agregar,
             payload: newTodo,
         };
@@ -67,7 +78,11 @@ export const TodoApp = () => {
 
         dispatch(action);
         reset();
-    }
+    };
+
+
+
+
 
     return (
         <div>
