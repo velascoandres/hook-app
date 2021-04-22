@@ -1,15 +1,27 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useEffect, useReducer, useRef } from 'react';
+import { useForm } from '../../hooks/useForm';
 import './styles.css';
 import { initialState, ITodo, TodoAction, TodoActionEnum, todoReducer } from './todoReducer';
 
 
+const init = () => {
+
+    const rawTodos = localStorage.getItem('todos');
+
+    return rawTodos ? JSON.parse(rawTodos): [];
+};
 
 
 export const TodoApp = () => {
 
-    const [todos, dispatch] = useReducer(todoReducer, initialState);
+    // const [todos, dispatch] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, [], init);
 
+    const [{ desc: description }, handleInputChange, reset] = useForm<ITodo>({ id: 0, desc: '', done: false });
 
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
 
     const renderizarTodos = () => {
         return todos.map(
@@ -36,10 +48,14 @@ export const TodoApp = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
+        if (description.trim().length <= 1) {
+            return;
+        }
+
         const newTodo: ITodo = {
             id: new Date().getTime(),
-            desc: 'Nuevo todo',
+            desc: description,
             done: false,
         };
 
@@ -48,8 +64,9 @@ export const TodoApp = () => {
             payload: newTodo,
         };
 
-        dispatch(action);
 
+        dispatch(action);
+        reset();
     }
 
     return (
@@ -69,10 +86,12 @@ export const TodoApp = () => {
                         <input
                             ref={inputRef}
                             type="text"
-                            name="Description"
+                            name="desc"
                             placeholder="Aprender ..."
                             autoComplete="off"
                             className="form-control"
+                            value={description}
+                            onChange={handleInputChange}
                         />
                         <button
                             type="submit"
