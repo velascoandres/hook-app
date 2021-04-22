@@ -10,6 +10,7 @@ import { Layout } from './components/05-useLayoutEffect/Layout';
 import { CallbackHook } from './components/06-memos/CallbackHook'
 import { MemoHook } from './components/06-memos/MemoHook'
 import { Memorize } from './components/06-memos/Memorize'
+import { TodoApp } from './components/08-useReducer/TodoApp'
 
 export const HookApp = () => {
     return (
@@ -25,8 +26,9 @@ export const HookApp = () => {
             <Layout />
             <Memorize />
             <MemoHook />
-            */}
             <CallbackHook />
+            */}
+            <TodoApp />
         </div>
     );
 }
