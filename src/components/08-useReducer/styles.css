@@ -1,3 +1,14 @@
 body{
     padding: 50px;
 }
+
+.list-group-item{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.complete {
+    text-decoration: line-through;
+}
