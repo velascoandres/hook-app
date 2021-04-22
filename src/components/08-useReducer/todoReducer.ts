@@ -18,7 +18,8 @@ export const initialState: TodosState = [
 
 export enum TodoActionEnum {
     agregar = 'AGREGAR',
-    borrar = 'BORRAR'
+    borrar = 'BORRAR',
+    completar = 'COMPLETAR,'
 }
 
 export interface TodoAction {
@@ -32,12 +33,12 @@ export interface CrearTodo extends TodoAction {
 
 export interface BorrarTodo extends TodoAction {
     type: TodoActionEnum.borrar;
-    payload: {id: number};
+    payload: { id: number };
 }
 
 export interface CompletarTodo extends TodoAction {
-    type: TodoActionEnum.borrar;
-    payload: {id: number};
+    type: TodoActionEnum.completar;
+    payload: { id: number };
 }
 
 
@@ -45,7 +46,7 @@ export interface CompletarTodo extends TodoAction {
 
 
 export const todoReducer: Reducer<TodosState, TodoAction> = (state: TodosState = [], action?: TodoAction) => {
-    switch(action?.type){
+    switch (action?.type) {
         case TodoActionEnum.agregar:
             return [
                 ...state,
@@ -54,6 +55,20 @@ export const todoReducer: Reducer<TodosState, TodoAction> = (state: TodosState =
         case TodoActionEnum.borrar:
             return state.filter(
                 todo => todo.id !== (action as BorrarTodo).payload.id,
+            );
+        case TodoActionEnum.completar:
+            return state.map(
+                todo => {
+                    const esTodo = todo.id === (action as CompletarTodo).payload.id;
+                    if (esTodo) {
+                        todo.done = !todo.done;
+                        return {
+                            ...todo,
+                            done: !todo.done,
+                        };
+                    }
+                    return todo;
+                },
             );
         default:
             return state;

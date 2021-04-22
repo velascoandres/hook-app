@@ -11,4 +11,11 @@ body{
 
 .complete {
     text-decoration: line-through;
+    color: green;
+    transform: scale(1.1,1.1);
+    transition: 1s;
+}
+
+.uncomplete {
+    transition: 1s;
 }

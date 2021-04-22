@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import { useForm } from '../../hooks/useForm';
 import './styles.css';
-import { BorrarTodo, CrearTodo, ITodo, TodoActionEnum, todoReducer } from './todoReducer';
+import { BorrarTodo, CompletarTodo, CrearTodo, ITodo, TodoActionEnum, todoReducer } from './todoReducer';
 
 
 const init = () => {
@@ -34,14 +34,27 @@ export const TodoApp = () => {
         };
     };
 
+    const handleComplete = (id: number) => {
+        return () => {
+            const action: CompletarTodo = {
+                type: TodoActionEnum.completar,
+                payload: { id, },
+            };
+            dispatch(action);
+        };
+    };
+
     const renderizarTodos = () => {
         return todos.map(
-            ({ id, desc }, indice: number) => (
+            ({ id, desc, done }, indice: number) => (
                 <li
                     key={id}
                     className="list-group-item"
                 >
-                    <p className="text-center">
+                    <p 
+                        className={done ? "complete": "uncomplete"}
+                        onClick={handleComplete(id)}
+                    >
                         {indice + 1}. {desc}
                     </p>
                     <button
