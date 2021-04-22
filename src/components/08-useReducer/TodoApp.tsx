@@ -1,13 +1,13 @@
-import { useReducer } from 'react';
+import React, { useReducer, useRef } from 'react';
 import './styles.css';
-import { initialState, todoReducer } from './todoReducer';
+import { initialState, ITodo, TodoAction, TodoActionEnum, todoReducer } from './todoReducer';
 
 
 
 
 export const TodoApp = () => {
 
-    const [todos] = useReducer(todoReducer, initialState);
+    const [todos, dispatch] = useReducer(todoReducer, initialState);
 
 
 
@@ -31,6 +31,27 @@ export const TodoApp = () => {
         );
     };
 
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        const newTodo: ITodo = {
+            id: new Date().getTime(),
+            desc: 'Nuevo todo',
+            done: false,
+        };
+
+        const action: TodoAction = {
+            type: TodoActionEnum.agregar,
+            payload: newTodo,
+        };
+
+        dispatch(action);
+
+    }
+
     return (
         <div>
             <h1>TodoApp ({todos.length})</h1>
@@ -44,8 +65,9 @@ export const TodoApp = () => {
                     <h4>Agregar Todo</h4>
                     <hr />
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <input
+                            ref={inputRef}
                             type="text"
                             name="Description"
                             placeholder="Aprender ..."
@@ -53,6 +75,7 @@ export const TodoApp = () => {
                             className="form-control"
                         />
                         <button
+                            type="submit"
                             className="btn btn-outline-primary mt-1 btn-block"
                         >
                             Agregar
