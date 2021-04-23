@@ -3,15 +3,20 @@ import {
     Switch,
     Route,
     Link,
+    Redirect,
 } from 'react-router-dom';
 import { AboutScreen } from './AboutScreen';
 import { HomeScreen } from './HomeScreen';
 import { LoginScreen } from './LoginScreen';
+import { NavBar } from './NavBar';
 
 export const AppRouter = () => {
     return (
         <Router>
             <div>
+
+                <NavBar />
+
                 <Switch>
                     <Route
                         exact
@@ -27,6 +32,10 @@ export const AppRouter = () => {
                         exact
                         path="/login"
                         component={LoginScreen}
+                    />
+
+                    <Redirect
+                        to="/"
                     />
 
                 </Switch>
