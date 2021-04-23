@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Padre } from './components/07-tarea-memo/Padre';
-import { HookApp } from './HookApp';
+import { MainApp } from './components/09-useContext/MainApp';
 
 
 ReactDOM.render(
   <React.StrictMode>
     {/*
-    
-   <Padre />
+       <Padre />
+       <HookApp />
     */}
-    <HookApp />
+    <MainApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
