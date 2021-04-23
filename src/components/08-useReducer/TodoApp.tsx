@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useRef } from 'react';
 import { useForm } from '../../hooks/useForm';
 import './styles.css';
 import { BorrarTodo, CompletarTodo, CrearTodo, ITodo, TodoActionEnum, todoReducer } from './todoReducer';
+import { TodoItem } from './TodoItem';
+import { TodoList } from './TodoList';
 
 
 const init = () => {
@@ -44,30 +46,6 @@ export const TodoApp = () => {
         };
     };
 
-    const renderizarTodos = () => {
-        return todos.map(
-            ({ id, desc, done }, indice: number) => (
-                <li
-                    key={id}
-                    className="list-group-item"
-                >
-                    <p 
-                        className={done ? "complete": "uncomplete"}
-                        onClick={handleComplete(id)}
-                    >
-                        {indice + 1}. {desc}
-                    </p>
-                    <button
-                        className="btn btn-danger"
-                        onClick={handleDelete(id)}
-                    >
-                        Borrar
-                    </button>
-                </li>
-            ),
-        );
-    };
-
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -103,9 +81,12 @@ export const TodoApp = () => {
             <hr />
             <div className="row">
                 <div className="col-7">
-                    <ul className="list-group list-group-flush">
-                        {renderizarTodos()}
-                    </ul>                </div>
+                    <TodoList
+                        todos={todos}
+                        handleComplete={handleComplete}
+                        handleDelete={handleDelete}
+                    />
+                </div>
                 <div className="col-5">
                     <h4>Agregar Todo</h4>
                     <hr />
