@@ -1,7 +1,14 @@
 import { useState } from "react"
 
+export interface ICounterHook {
+    counter: number;
+    increment: (n?:number) => () => void;
+    decrement: (n?:number) => () => void;
+    reset: () => void;
+}
 
-export const useCounter = (initialState: number = 1) => {
+
+export const useCounter = (initialState: number = 1): ICounterHook => {
 
     const [counter, setCounter] = useState(initialState);
 
