@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pruebas en <RealExample /> Debe mostrarse correctamente 1`] = `
+<div>
+  <h1>
+    Real Example Ref
+  </h1>
+  <hr />
+  <MultipleCustomHooks />
+  <button
+    className="btn btn-danger mt-5"
+    onClick={[Function]}
+  >
+    Hide
+  </button>
+</div>
+`;
