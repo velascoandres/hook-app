@@ -19,7 +19,8 @@ export const initialState: TodosState = [
 export enum TodoActionEnum {
     agregar = 'AGREGAR',
     borrar = 'BORRAR',
-    completar = 'COMPLETAR,'
+    completar = 'COMPLETAR,',
+    inicial = 'INICIO',
 }
 
 export interface TodoAction {
@@ -45,7 +46,7 @@ export interface CompletarTodo extends TodoAction {
 
 
 
-export const todoReducer: Reducer<TodosState, TodoAction> = (state: TodosState = [], action?: TodoAction) => {
+export const todoReducer: Reducer<TodosState, TodoAction> = (state: TodosState = [], action: TodoAction) => {
     switch (action?.type) {
         case TodoActionEnum.agregar:
             return [
