@@ -3,8 +3,8 @@ import { ITodo } from './todoReducer';
 
 export type TodoListProps = {
     todos: ITodo[];
-    handleDelete: (id: number) => () => void;
-    handleComplete: (id: number) => () => void;
+    handleDelete: (id: number) => void;
+    handleComplete: (id: number) => void;
 };
 
 export const TodoList = ({ todos, handleComplete, handleDelete }: TodoListProps) => {

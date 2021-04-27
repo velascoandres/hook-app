@@ -33,23 +33,19 @@ export const TodoApp = () => {
 
 
     const handleDelete = (id: number) => {
-        return () => {
-            const action: BorrarTodo = {
-                type: TodoActionEnum.borrar,
-                payload: { id, },
-            };
-            dispatch(action);
+        const action: BorrarTodo = {
+            type: TodoActionEnum.borrar,
+            payload: { id, },
         };
+        dispatch(action);
     };
 
     const handleComplete = (id: number) => {
-        return () => {
-            const action: CompletarTodo = {
-                type: TodoActionEnum.completar,
-                payload: { id, },
-            };
-            dispatch(action);
+        const action: CompletarTodo = {
+            type: TodoActionEnum.completar,
+            payload: { id, },
         };
+        dispatch(action);
     };
 
     const handleAddTodo = (newTodo: ITodo) => {

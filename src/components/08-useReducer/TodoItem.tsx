@@ -3,8 +3,8 @@ import { ITodo } from './todoReducer';
 
 export type TodoItemProps = {
     todo: ITodo;
-    handleDelete: (id: number) => () => void;
-    handleComplete: (id: number) => () => void;
+    handleDelete: (id: number) => void;
+    handleComplete: (id: number) => void;
     index: number;
 };
 
@@ -19,13 +19,13 @@ export const TodoItem = ({ todo, index, handleDelete, handleComplete }: TodoItem
         >
             <p
                 className={done ? "complete" : "uncomplete"}
-                onClick={handleComplete(id)}
+                onClick={() => handleComplete(id)}
             >
                 {index + 1}. {desc}
             </p>
             <button
                 className="btn btn-danger"
-                onClick={handleDelete(id)}
+                onClick={() => handleDelete(id)}
             >
                 Borrar
             </button>
