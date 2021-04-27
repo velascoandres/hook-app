@@ -62,13 +62,13 @@ export const todoReducer: Reducer<TodosState, TodoAction> = (state: TodosState =
                 todo => {
                     const esTodo = todo.id === (action as CompletarTodo).payload.id;
                     if (esTodo) {
-                        todo.done = !todo.done;
                         return {
                             ...todo,
                             done: !todo.done,
                         };
+                    } else {
+                        return todo;
                     }
-                    return todo;
                 },
             );
         default:
