@@ -14,6 +14,7 @@ export const TodoList = ({ todos, handleComplete, handleDelete }: TodoListProps)
                 todos.map(
                     (todo, indice: number) => (
                         <TodoItem
+                            key={todo.id}
                             todo={todo}
                             index={indice}
                             handleComplete={handleComplete}
