@@ -52,3 +52,4 @@ export const TodoAdd = ({handleAddTodo}: TodoAppProps) => {
         </Fragment>
     );
 }
+ 
